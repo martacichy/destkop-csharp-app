@@ -6,19 +6,30 @@
         xmlns:local="clr-namespace:DeskC"
         mc:Ignorable="d"
         Title="Kanban" Height="800" Width="1600">
-    <Grid>
+    <Grid TextBlock.FontSize="22">
 
-        <DockPanel HorizontalAlignment="Left" Height="655" LastChildFill="False" Margin="10,104,0,0" VerticalAlignment="Top" Width="1186" Background="Aqua"/>
-        <Grid>
-            <Label Content="Opis zadania" Height="50" VerticalAlignment="Top" RenderTransformOrigin="7.789,0.817" Margin="1286,345,104,0"/>
-            <TextBox HorizontalAlignment="Left" Height="36" Margin="1286,291,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="202"/>
-            <TextBox HorizontalAlignment="Left" Height="96" Margin="1286,400,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="202" RenderTransformOrigin="0.635,2.413"/>
-            <ComboBox HorizontalAlignment="Left" Margin="1286,569,0,0" VerticalAlignment="Top" Width="202" SelectionChanged="ComboBox_SelectionChanged" Height="33"/>
-            <Label Content="Status" Height="50" VerticalAlignment="Top" RenderTransformOrigin="7.789,0.817" Margin="1286,514,104,0"/>
-            <Button Content="Dodaj" HorizontalAlignment="Left" Margin="1367,644,0,0" VerticalAlignment="Top" Width="121" Height="40" Click="Button_Click"/>
-            <Label Content="Tytuł zadania" Height="50" VerticalAlignment="Top" RenderTransformOrigin="7.789,0.817" Margin="1286,236,104,0"/>
+        <DockPanel HorizontalAlignment="Left" Height="560" LastChildFill="False" Margin="10,199,0,0" VerticalAlignment="Top" Width="1160" Background="Aqua">
+            <ListBox Name="taskTodo" Height="376" VerticalAlignment="Top" Width="290" RenderTransformOrigin="2.665,0.589"/>
+            <ListBox Name="taskDoing" Height="376" VerticalAlignment="Top" Width="290" RenderTransformOrigin="2.665,0.589"/>
+            <ListBox Name="taskDone" Height="376" VerticalAlignment="Top" Width="290" RenderTransformOrigin="2.665,0.589"/>
+            <ListBox Name="taskCanceled" Height="376" VerticalAlignment="Top" Width="290" RenderTransformOrigin="2.665,0.589"/>
+        </DockPanel>
+        <Grid TextBlock.FontSize="20">
+            <Label Content="Opis zadania" Height="50" VerticalAlignment="Top" RenderTransformOrigin="7.789,0.817" Margin="1236,250,44,0"/>
+            <TextBox Name ="shortText" HorizontalAlignment="Left" Height="43" Margin="1236,183,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="312"/>
+            <TextBox Name ="fullText" HorizontalAlignment="Left" Height="96" Margin="1236,305,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="312" RenderTransformOrigin="0.635,2.413"/>
+            <ComboBox Name="status" HorizontalAlignment="Left" Margin="1236,477,0,0" VerticalAlignment="Top" Width="312" SelectionChanged="ComboBox_SelectionChanged" Height="41"/>
+            <Label Content="Status" Height="50" VerticalAlignment="Top" RenderTransformOrigin="7.789,0.817" Margin="1236,422,44,0"/>
+            <Button Content="Dodaj" HorizontalAlignment="Left" Margin="1416,590,0,0" VerticalAlignment="Top" Width="132" Height="46" Click="Button_Click"/>
+            <Label Content="Tytuł zadania" Height="50" VerticalAlignment="Top" RenderTransformOrigin="7.789,0.817" Margin="1236,128,44,0"/>
+            <DockPanel HorizontalAlignment="Left" Height="64" Margin="10,128,0,0" VerticalAlignment="Top" Width="1158" RenderTransformOrigin="0.497,0.02">
+                <Label Content="To do" HorizontalAlignment="Left" VerticalAlignment="Top" Width="290" Height="64"/>
+                <Label Content="Doing" HorizontalAlignment="Left" VerticalAlignment="Top" Width="290" Height="64"/>
+                <Label Content="Done" HorizontalAlignment="Left" VerticalAlignment="Top" Width="290" Height="64"/>
+                <Label Content="Canceled" HorizontalAlignment="Left" VerticalAlignment="Top" Width="290" Height="64"/>
+            </DockPanel>
         </Grid>
-        
+
 
     </Grid>
 </Window>
