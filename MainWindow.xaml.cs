@@ -12,6 +12,10 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Data.SQLite;
+using System.Configuration;
+using System.Data;
+using System.Data.SqlClient;
 
 namespace DeskC
 {
@@ -23,6 +27,69 @@ namespace DeskC
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void zaloguj_Click(object sender, RoutedEventArgs e)
+        {
+            if (login.Text.Trim() == "" || password.Password.Trim() == "")
+            {
+                MessageBox.Show("Uzupełnij login oraz hasło!");
+            }
+            else
+            {
+                List<string> Data = Auth(login.Text, password.Password.Trim());
+                if (Data.Count > 0)
+                {
+                    Session.Id = Data[0];
+                    Session.Login = Data[1];
+
+                    StartWindow main = new StartWindow();
+                    Close();
+                    main.Show();
+                }
+                else
+                {
+                    MessageBox.Show("Blad logowania.");
+                }
+
+            }
+        }
+
+        private static string LoadConnectionString(string id = "Default")
+        {
+            return ConfigurationManager.ConnectionStrings[id].ConnectionString;
+        }
+
+
+        public static List<string> Auth(string User, string Password)
+        {
+
+            //string query = "SELECT * FROM Users WHERE login= @login AND password = @password";
+            SQLiteConnection connection = new SQLiteConnection(LoadConnectionString());
+            connection.Open();
+            //SQLiteCommand cmd = new SQLiteCommand(query, connection);
+
+
+            //SQLiteDataAdapter da = new SQLiteDataAdapter(cmd);
+
+            //DataTable dt = new DataTable();
+            //da.Fill(dt);
+            
+            List<string> Return = new List<string>();
+            string query = "SELECT * FROM Users WHERE Login = @login AND Password = @password LIMIT 1";
+            SQLiteCommand cmd = new SQLiteCommand(query, connection);
+            cmd.Parameters.AddWithValue("@login", User);
+            cmd.Parameters.AddWithValue("@password", Password);
+            SQLiteDataReader dataReader = cmd.ExecuteReader();
+
+            while (dataReader.Read())
+            {
+                Return.Add(dataReader["Id"] + "");
+                Return.Add(dataReader["Login"] + "");
+            }
+            dataReader.Close();
+
+            return Return;
         }
     }
 }

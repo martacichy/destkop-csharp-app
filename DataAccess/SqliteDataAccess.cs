@@ -7,6 +7,7 @@ using System.Data.SQLite;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DeskCLogic;
 
 namespace DeskC
 {
@@ -21,38 +22,38 @@ namespace DeskC
             }
         }
 
-        public static List<TaskModel> LoadToDo()
+        public static List<TaskModel> LoadToDo(string ID)
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                var output = cnn.Query<TaskModel>("select * from Tasks WHERE StatusId = '1'", new DynamicParameters());
+                var output = cnn.Query<TaskModel>("select * from Tasks WHERE StatusId = '1' and usId =" + ID + ";");
                 return output.ToList();
             }
         }
 
-        public static List<TaskModel> LoadDoing()
+        public static List<TaskModel> LoadDoing(string ID)
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                var output = cnn.Query<TaskModel>("select * from Tasks WHERE StatusId = 2", new DynamicParameters());
+                var output = cnn.Query<TaskModel>("select * from Tasks WHERE StatusId = 2 and usId =" + ID + ";");
                 return output.ToList();
             }
         }
 
-        public static List<TaskModel> LoadDone()
+        public static List<TaskModel> LoadDone(string ID)
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                var output = cnn.Query<TaskModel>("select * from Tasks WHERE StatusId = 3", new DynamicParameters());
+                var output = cnn.Query<TaskModel>("select * from Tasks WHERE StatusId = 3 and usId =" + ID + ";");
                 return output.ToList();
             }
         }
 
-        public static List<TaskModel> LoadCanceled()
+        public static List<TaskModel> LoadCanceled(string ID)
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                var output = cnn.Query<TaskModel>("select * from Tasks WHERE StatusId = 4", new DynamicParameters());
+                var output = cnn.Query<TaskModel>("select * from Tasks WHERE StatusId = 4 and usId =" + ID + ";");
                 return output.ToList();
             }
         }
@@ -66,13 +67,7 @@ namespace DeskC
             }
         }
 
-        public static void AddTask(TaskModel task)
-        {
-            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
-            {
-                cnn.Execute("insert into Tasks (shortText, fullText, statusId, usId) values (@shortText, @fullText, @statusId, 1)", task);
-            }
-        }
+        
         //public static void SavePerson(PersonModel person)
         //{
         //    using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))

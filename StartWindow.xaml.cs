@@ -18,6 +18,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DeskCLogic;
 
 namespace DeskC
 {
@@ -39,7 +40,7 @@ namespace DeskC
         {
             InitializeComponent();
             DataContext = new TaskModel();
-
+            userLabel.Content = "Jesteś zalogowany jako " + Session.Login;
             Refresh();
         }
 
@@ -48,14 +49,23 @@ namespace DeskC
 
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void ButtonDodaj_Click(object sender, RoutedEventArgs e)
         {
             var task = new TaskModel();
             task.fullText = fullText.Text;
             task.shortText = shortText.Text;
             task.statusId = MapujStatus(status.Text);
-            SqliteDataAccess.AddTask(task);
+            task.usId = Session.Id;
+            //task.usId = Convert.ToInt32(Session.Id);
+            Zadania.AddTask(task);
             Wyczysc();
+            Refresh();
+        }
+
+        private void ButtonUsun_Click(object sender, RoutedEventArgs e)
+        {
+            int id = 2;
+            Zadania.DeleteTask(id);
             Refresh();
         }
 
@@ -80,10 +90,10 @@ namespace DeskC
         {
             statusy = SqliteDataAccess.LoadTaskEnum();
             ludzie = SqliteDataAccess.LoadPeople();
-            ToDo = SqliteDataAccess.LoadToDo();
-            Doing = SqliteDataAccess.LoadDoing();
-            Done = SqliteDataAccess.LoadDone();
-            Canceled = SqliteDataAccess.LoadDone();
+            ToDo = SqliteDataAccess.LoadToDo(Session.Id);
+            Doing = SqliteDataAccess.LoadDoing(Session.Id);
+            Done = SqliteDataAccess.LoadDone(Session.Id);
+            Canceled = SqliteDataAccess.LoadDone(Session.Id);
 
             WypiszZadania();
         }
@@ -111,6 +121,11 @@ namespace DeskC
         {
             fullText.Text = "";
             shortText.Text = "";
+        }
+
+        private void refresh_Click(object sender, RoutedEventArgs e)
+        {
+            Refresh();
         }
     }
 }

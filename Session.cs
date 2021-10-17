@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace DeskC
 {
-    public class TaskEnumModel
+    class Session
     {
-        public int Id { get; set; }
-        public string Status { get; set; }
+        public static string Id;
+        public static string Login;
     }
 }

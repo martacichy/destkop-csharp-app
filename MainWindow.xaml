@@ -5,9 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DeskC"
         mc:Ignorable="d"
-        Title="MainWindow" Height="1000" Width="1600">
-    <Grid>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="520,397,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="520,479,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        Title="MainWindow" Height="708" Width="560">
+    <Grid HorizontalAlignment="Left" Height="698" VerticalAlignment="Top" Width="550" Margin="0,0,0,-21" TextBlock.FontSize="22" Background="AliceBlue">
+        <PasswordBox Name="password" HorizontalAlignment="Center"  VerticalAlignment="Top" Height="60" Width="300" Margin="117,382,114,0" />
+        <TextBox Name="login" HorizontalAlignment="Left" Height="60" Margin="126,264,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="300
+                 "/>
+        <Label Content="User" Height="50" Width="292" Margin="126,209,132,439"/>
+        <Label Content="Password" Height="50" Width="292" Margin="126,327,132,321"/>
+        <Button Name="Zaloguj" Content="Zaloguj" HorizontalAlignment="Center" VerticalAlignment="Top" Width="176" Height="46" Margin="250,506,124,0" Click="zaloguj_Click"/>
     </Grid>
 </Window>
