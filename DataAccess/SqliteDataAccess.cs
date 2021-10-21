@@ -8,6 +8,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DeskCLogic;
+using System.Collections.ObjectModel;
+
 
 namespace DeskC
 {
@@ -22,41 +24,68 @@ namespace DeskC
             }
         }
 
-        public static List<TaskModel> LoadToDo(string ID)
+        public static ObservableCollection<TaskModel> LoadToDo(string ID)
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                var output = cnn.Query<TaskModel>("select * from Tasks WHERE StatusId = '1' and usId =" + ID + ";");
-                return output.ToList();
+                var output = cnn.Query<TaskModel>("select * from Tasks WHERE StatusId = '1' and usId =" + ID + ";").ToList();
+
+                foreach (var d in output)
+                {
+                    d.TextToDisplay = d.shortText + "\n " + d.fullText;
+                }
+
+                ObservableCollection<TaskModel> response = new ObservableCollection<TaskModel>(output);
+                return response;
             }
         }
 
-        public static List<TaskModel> LoadDoing(string ID)
+        public static ObservableCollection<TaskModel> LoadDoing(string ID)
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                var output = cnn.Query<TaskModel>("select * from Tasks WHERE StatusId = 2 and usId =" + ID + ";");
-                return output.ToList();
-            }
-        }
+                var output = cnn.Query<TaskModel>("select * from Tasks WHERE StatusId = '2' and usId =" + ID + ";").ToList();
 
-        public static List<TaskModel> LoadDone(string ID)
-        {
-            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
-            {
-                var output = cnn.Query<TaskModel>("select * from Tasks WHERE StatusId = 3 and usId =" + ID + ";");
-                return output.ToList();
-            }
-        }
+                foreach (var d in output)
+                {
+                    d.TextToDisplay = d.shortText + "\n " + d.fullText;
+                }
 
-        public static List<TaskModel> LoadCanceled(string ID)
+                ObservableCollection<TaskModel> response = new ObservableCollection<TaskModel>(output);
+                return response;
+            }
+        }
+        public static ObservableCollection<TaskModel> LoadDone(string ID)
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                var output = cnn.Query<TaskModel>("select * from Tasks WHERE StatusId = 4 and usId =" + ID + ";");
-                return output.ToList();
+                var output = cnn.Query<TaskModel>("select * from Tasks WHERE StatusId = '3' and usId =" + ID + ";").ToList();
+
+                foreach (var d in output)
+                {
+                    d.TextToDisplay = d.shortText + "\n " + d.fullText;
+                }
+
+                ObservableCollection<TaskModel> response = new ObservableCollection<TaskModel>(output);
+                return response;
             }
         }
+        public static ObservableCollection<TaskModel> LoadCanceled(string ID)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                var output = cnn.Query<TaskModel>("select * from Tasks WHERE StatusId = '4' and usId =" + ID + ";").ToList();
+
+                foreach (var d in output)
+                {
+                    d.TextToDisplay = d.shortText + "\n " + d.fullText;
+                }
+
+                ObservableCollection<TaskModel> response = new ObservableCollection<TaskModel>(output);
+                return response;
+            }
+        }
+        
 
         public static List<TaskEnumModel> LoadTaskEnum()
         {

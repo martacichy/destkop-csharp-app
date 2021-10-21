@@ -4,17 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DeskC;
-using System;
-using System.Collections.Generic;
 using Dapper;
-using System;
-using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SQLite;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using DeskCLogic;
 
 namespace DeskC
@@ -33,7 +26,8 @@ namespace DeskC
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                cnn.Execute("delete from Tasks WHERE Id = '{0}'", taskId);
+                string sql = $"DELETE FROM Tasks WHERE Id = {taskId}";
+                cnn.Execute(sql);
             }
         }
 

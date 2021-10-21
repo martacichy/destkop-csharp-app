@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeskC", "DeskC.csproj", "{E
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeskCLogic", "..\DeskC.Logic\DeskCLogic.csproj", "{55A95D21-3FCF-45D6-A5AE-D5A171BF0D8A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeskCService", "..\DeskCService\DeskCService.csproj", "{2A7C8218-CE0C-40F0-98E8-B2C2A73215BE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{55A95D21-3FCF-45D6-A5AE-D5A171BF0D8A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{55A95D21-3FCF-45D6-A5AE-D5A171BF0D8A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{55A95D21-3FCF-45D6-A5AE-D5A171BF0D8A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2A7C8218-CE0C-40F0-98E8-B2C2A73215BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A7C8218-CE0C-40F0-98E8-B2C2A73215BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A7C8218-CE0C-40F0-98E8-B2C2A73215BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A7C8218-CE0C-40F0-98E8-B2C2A73215BE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

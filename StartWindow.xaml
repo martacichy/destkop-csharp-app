@@ -9,30 +9,59 @@
     <Grid TextBlock.FontSize="22">
 
         <DockPanel HorizontalAlignment="Left" Height="560" LastChildFill="False" Margin="10,199,0,0" VerticalAlignment="Top" Width="1160" Background="Aqua">
-            <StackPanel>
-                <ListBox Name="taskTodo" Height="376" VerticalAlignment="Top" Width="290" RenderTransformOrigin="2.665,0.589" ItemsSource="{Binding Path=TopicList}" >
+            <Grid Width="290">
+                <ListBox x:Name="myTaskTodo" ItemsSource="{Binding ToDo}" MouseDoubleClick="myTaskTodo_DoubleClick" >
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <CheckBox x:Name="taskTodoDisplay" IsChecked="{Binding Selected}" Content="{Binding TextToDisplay}" Checked="RadioButton_Checked"/>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
                 </ListBox>
-            </StackPanel>
-            <ListBox Name="taskDoing" Height="376" VerticalAlignment="Top" Width="290" RenderTransformOrigin="2.665,0.589"/>
-            <ListBox Name="taskDone" Height="376" VerticalAlignment="Top" Width="290" RenderTransformOrigin="2.665,0.589"/>
-            <ListBox Name="taskCanceled" Height="376" VerticalAlignment="Top" Width="290" RenderTransformOrigin="2.665,0.589"/>
+            </Grid>
+            <Grid Width="290">
+                <ListBox x:Name="mytaskDoing" ItemsSource="{Binding Doing}" MouseDoubleClick="myTaskDoing_DoubleClick" >
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <CheckBox x:Name="taskDoingDisplay" IsChecked="{Binding Selected}" Content="{Binding TextToDisplay}" Checked="RadioButton_Checked"/>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </Grid>
+            <Grid Width="290">
+                <ListBox x:Name="mytaskDone" ItemsSource="{Binding Done}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <CheckBox x:Name="taskDoneDisplay" IsChecked="{Binding Selected}" Content="{Binding TextToDisplay}" Checked="RadioButton_Checked" />
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </Grid>
+            <Grid Width="290">
+                <ListBox x:Name="mytaskCanceled" ItemsSource="{Binding Canceled}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <CheckBox x:Name="taskCanceledDisplay" IsChecked="{Binding Selected}" Content="{Binding TextToDisplay}" Checked="RadioButton_Checked"/>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </Grid>
         </DockPanel>
         <Grid TextBlock.FontSize="20">
             <Label Content="Opis zadania" Height="50" VerticalAlignment="Top" RenderTransformOrigin="7.789,0.817" Margin="1236,250,44,0"/>
-            <TextBox Name ="shortText" HorizontalAlignment="Left" Height="43" Margin="1236,183,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="312" />
-            <TextBox Name ="fullText" HorizontalAlignment="Left" Height="96" Margin="1236,305,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="312" RenderTransformOrigin="0.635,2.413"/>
+            <TextBox Name ="shortText" HorizontalAlignment="Left" Height="43" Margin="1236,183,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="312" MaxLength="20"/>
+            <TextBox Name ="fullText" HorizontalAlignment="Left" Height="96" Margin="1236,305,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="312" MaxLength="30" RenderTransformOrigin="0.635,2.413"/>
             <ComboBox Name="status" HorizontalAlignment="Left" Margin="1236,477,0,0" VerticalAlignment="Top" Width="312" SelectionChanged="ComboBox_SelectionChanged" Height="41"/>
             <Label Content="Status" Height="50" VerticalAlignment="Top" RenderTransformOrigin="7.789,0.817" Margin="1236,422,44,0"/>
             <Button Name="dodaj" Content="Dodaj" HorizontalAlignment="Left" Margin="1416,590,0,0" VerticalAlignment="Top" Width="132" Height="46" Click="ButtonDodaj_Click"/>
             <Label Content="Tytuł zadania" Height="50" VerticalAlignment="Top" RenderTransformOrigin="7.789,0.817" Margin="1236,128,44,0"/>
-            <DockPanel HorizontalAlignment="Left" Height="64" Margin="10,128,0,0" VerticalAlignment="Top" Width="1158" RenderTransformOrigin="0.497,0.02">
+            <DockPanel TextBlock.FontSize="28" TextBlock.TextAlignment="Center" HorizontalAlignment="Left" Height="64" Margin="10,128,0,0" VerticalAlignment="Top" Width="1158" RenderTransformOrigin="0.497,0.02">
                 <Label Content="To do" HorizontalAlignment="Left" VerticalAlignment="Top" Width="290" Height="64"/>
                 <Label Content="Doing" HorizontalAlignment="Left" VerticalAlignment="Top" Width="290" Height="64"/>
                 <Label Content="Done" HorizontalAlignment="Left" VerticalAlignment="Top" Width="290" Height="64"/>
                 <Label Content="Canceled" HorizontalAlignment="Left" VerticalAlignment="Top" Width="290" Height="64"/>
             </DockPanel>
             <Button Name="usun" Content="Usuń" HorizontalAlignment="Left" Margin="1236,590,0,0" VerticalAlignment="Top" Width="132" Height="46" Click="ButtonUsun_Click" RenderTransformOrigin="-0.633,0.543"/>
-            <Label Name="userLabel" HorizontalAlignment="Left" Margin="1335,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,-1.027" Height="68" Width="247"/>
+            <Label FontSize="24" FontFamily="Consolas" Name="userLabel" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,-1.027" Height="68" Width="586"/>
             <Button Name="refresh" Content="Refresh" HorizontalAlignment="Left" Margin="1316,694,0,0" VerticalAlignment="Top" Width="150" Click="refresh_Click" />
         </Grid>
 
