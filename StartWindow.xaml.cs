@@ -16,6 +16,7 @@ using System.Data;
 using System.Drawing;
 using DeskCLogic;
 using System.Collections.ObjectModel;
+using System.Threading;
 
 namespace DeskC
 {
@@ -24,11 +25,14 @@ namespace DeskC
     /// </summary>
     public partial class StartWindow : Window
     {
-        
+        public static int trybUsuwania = 1;
+        public static int trybEdycji = 1;
+        public static int idDoUsuniecia;
         public ObservableCollection<TaskModel> ToDo = new ObservableCollection<TaskModel>();
         public ObservableCollection<TaskModel> Doing = new ObservableCollection<TaskModel>();
         public ObservableCollection<TaskModel> Done = new ObservableCollection<TaskModel>();
         public ObservableCollection<TaskModel> Canceled = new ObservableCollection<TaskModel>();
+        public ObservableCollection<TaskModel> All = new ObservableCollection<TaskModel>();
 
         List<UsersModel> ludzie = new List<UsersModel>();
         List<TaskEnumModel> statusy = new List<TaskEnumModel>();
@@ -44,6 +48,21 @@ namespace DeskC
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
+        }
+
+
+        private void zapisz_Click(object sender, RoutedEventArgs e)
+        {
+            var task = new TaskModel();
+            task.fullText = fullText.Text;
+            task.shortText = shortText.Text;
+            task.statusId = MapujStatus(status.Text);
+            task.usId = Session.Id;
+            task.Id = idDoUsuniecia;
+            AktualizujZadanie(task);
+
+            Wyczysc();
+            Refresh();
         }
 
         private void ButtonDodaj_Click(object sender, RoutedEventArgs e)
@@ -67,23 +86,27 @@ namespace DeskC
             }
             else
                 MessageBox.Show("Uzupełnij wszystkie pola!");
-        } 
-        private void ButtonUsun_Click(object sender, RoutedEventArgs e)
-        {
-
-            BackgroundWorker bgWorker = new BackgroundWorker();
-            bgWorker.DoWork += bgWorker_DoWorkDelete;
-            bgWorker.RunWorkerCompleted += bgWorker_WorkComplete;
-
-            if (!bgWorker.IsBusy)
-            {
-                bgWorker.RunWorkerAsync();
-            }
-            Refresh();
         }
+
+        private void AktualizujZadanie(TaskModel task)
+        {
+            if (fullText.Text.Length != 0 && shortText.Text.Length != 0)
+            {
+
+                Zadania.UpdateTask(task);
+            }
+            else
+                MessageBox.Show("Uzupełnij wszystkie pola!");
+        }
+
         private void bgWorker_DoWorkDelete(object sender, DoWorkEventArgs e)
         {
-            delete();
+            delete(trybUsuwania);
+        }
+
+        private void bgWorker_DoWorkEdit(object sender, DoWorkEventArgs e)
+        {
+            edit(trybEdycji);
         }
 
         private void bgWorker_WorkComplete(object sender, RunWorkerCompletedEventArgs e)
@@ -94,21 +117,145 @@ namespace DeskC
             }
         }
 
-        private void delete()
+        private void delete(int trybUsuwania)
         {
-            var tasksToDelete = from s in ToDo
-                                where s.Selected == true
-                                select s.Id;
-            foreach (var task in tasksToDelete)
-            {
-                Zadania.DeleteTask(task);
 
+            switch(trybUsuwania)
+            {
+                case 1:
+                    {
+                        var tasksToDeleteToDo = from s in ToDo
+                                                where s.Selected == true
+                                                select s.Id;
+                        foreach (var task in tasksToDeleteToDo)
+                        {
+                            Zadania.DeleteTask(task);
+                        }
+                        break;
+                    }
+                case 2:
+                    {
+                        var tasksToDeleteDoing = from s in Doing
+                                                 where s.Selected == true
+                                                 select s.Id;
+                        foreach (var task in tasksToDeleteDoing)
+                        {
+                            Zadania.DeleteTask(task);
+                        }
+                        break;
+                    }
+                case 3:
+                    {
+                        var tasksToDeleteDone = from s in Done
+                                                where s.Selected == true
+                                                select s.Id;
+                        foreach (var task in tasksToDeleteDone)
+                        {
+                            Zadania.DeleteTask(task);
+                        }
+                        break;
+                    }
+                case 4:
+                    {
+                        var tasksToDeleteCanceled = from s in Canceled
+                                                    where s.Selected == true
+                                                    select s.Id;
+                        foreach (var task in tasksToDeleteCanceled)
+                        {
+                            Zadania.DeleteTask(task);
+                        }
+                        break;
+                    }
+                    
             }
             MessageBox.Show("Usunięto!");
             //MainWindow.us.ExecuteCommand(206);
 
             Refresh();
         }
+
+        private void RadioButton_Checked(object sender, RoutedEventArgs e )
+        {
+
+        }
+
+        private void edit(int trybEdycji)
+        {
+            switch(trybEdycji)
+            {
+                case 1:
+                    {
+                        var taskToEdit = from s in ToDo
+                                         where s.Selected == true
+                                         select s;
+                        idDoUsuniecia = taskToEdit.First().Id;
+
+                        Dispatcher.Invoke(new Action(() => { shortText.Text = taskToEdit.First().shortText; }));
+                        Dispatcher.Invoke(new Action(() => { fullText.Text = taskToEdit.First().fullText; }));
+                        Dispatcher.Invoke(new Action(() => { status.SelectedIndex = taskToEdit.First().statusId - 1; }));
+                        break;
+                    }
+                case 2:
+                    {
+                        var taskToEdit = from s in Doing
+                                         where s.Selected == true
+                                         select s;
+                        idDoUsuniecia = taskToEdit.First().Id;
+
+                        Dispatcher.Invoke(new Action(() => { shortText.Text = taskToEdit.First().shortText; }));
+                        Dispatcher.Invoke(new Action(() => { fullText.Text = taskToEdit.First().fullText; }));
+                        Dispatcher.Invoke(new Action(() => { status.SelectedIndex = taskToEdit.First().statusId - 1; }));
+                        break;
+                    }
+                case 3:
+                    {
+                        var taskToEdit = from s in Done
+                                         where s.Selected == true
+                                         select s;
+                        idDoUsuniecia = taskToEdit.First().Id;
+
+                        Dispatcher.Invoke(new Action(() => { shortText.Text = taskToEdit.First().shortText; }));
+                        Dispatcher.Invoke(new Action(() => { fullText.Text = taskToEdit.First().fullText; }));
+                        Dispatcher.Invoke(new Action(() => { status.SelectedIndex = taskToEdit.First().statusId - 1; }));
+                        break;
+                    }
+                case 4:
+                    {
+                        var taskToEdit = from s in Canceled
+                                         where s.Selected == true
+                                         select s;
+                        idDoUsuniecia = taskToEdit.First().Id;
+
+                        Dispatcher.Invoke(new Action(() => { shortText.Text = taskToEdit.First().shortText; }));
+                        Dispatcher.Invoke(new Action(() => { fullText.Text = taskToEdit.First().fullText; }));
+                        Dispatcher.Invoke(new Action(() => { status.SelectedIndex = taskToEdit.First().statusId - 1; }));
+                        break;
+                    }
+                default:
+                    {
+                        var taskToEdit = from s in ToDo
+                                         where s.Selected == true
+                                         select s;
+                        idDoUsuniecia = taskToEdit.First().Id;
+
+                        Dispatcher.Invoke(new Action(() => { shortText.Text = taskToEdit.First().shortText; }));
+                        Dispatcher.Invoke(new Action(() => { fullText.Text = taskToEdit.First().fullText; }));
+                        Dispatcher.Invoke(new Action(() => { status.SelectedIndex = taskToEdit.First().statusId - 1; }));
+                        break;
+                    }
+            }
+            UkryjButton();
+
+        }
+
+
+        private void UkryjButton()
+        {
+            Dispatcher.Invoke(new Action(() => { dodaj.Visibility = Visibility.Hidden; }));
+            Dispatcher.Invoke(new Action(() => { zapisz.Visibility = Visibility.Visible; }));
+
+        }
+
 
         private int MapujStatus(string status)
         {
@@ -136,9 +283,10 @@ namespace DeskC
             Doing = SqliteDataAccess.LoadDoing(Session.Id);
             Done = SqliteDataAccess.LoadDone(Session.Id);
             Canceled = SqliteDataAccess.LoadCanceled(Session.Id);
-
+            All = SqliteDataAccess.LoadAll(Session.Id);   
             Dispatcher.Invoke(new Action(() => BindData()));
-
+            Dispatcher.Invoke(new Action(() => { dodaj.Visibility = Visibility.Visible; }));
+            Dispatcher.Invoke(new Action(() => { zapisz.Visibility = Visibility.Hidden; }));
         }
         private void BindData()
         {
@@ -171,10 +319,6 @@ namespace DeskC
             Refresh();
         }
 
-        private void RadioButton_Checked(object sender, RoutedEventArgs e)
-        {
-
-        }
 
         private void myTaskTodo_DoubleClick(object sender, EventArgs e)
         {
@@ -189,6 +333,125 @@ namespace DeskC
             {
                 MessageBox.Show(mytaskDoing.SelectedItem.ToString());
             }
+        }
+
+        private void usun_Todo_Click(object sender, RoutedEventArgs e)
+        {
+            trybUsuwania = 1;
+            BackgroundWorker bgWorker = new BackgroundWorker();
+            bgWorker.DoWork += bgWorker_DoWorkDelete;
+            bgWorker.RunWorkerCompleted += bgWorker_WorkComplete;
+
+            if (!bgWorker.IsBusy)
+            {
+                bgWorker.RunWorkerAsync();
+            }
+            Refresh();
+        }
+
+        private void usun_Doing_Click(object sender, RoutedEventArgs e)
+        {
+            trybUsuwania = 2;
+            BackgroundWorker bgWorker = new BackgroundWorker();
+            bgWorker.DoWork += bgWorker_DoWorkDelete;
+            bgWorker.RunWorkerCompleted += bgWorker_WorkComplete;
+
+            if (!bgWorker.IsBusy)
+            {
+                bgWorker.RunWorkerAsync();
+            }
+            Refresh();
+        }
+
+        private void usun_Done_Click(object sender, RoutedEventArgs e)
+        {
+            trybUsuwania = 3;
+            BackgroundWorker bgWorker = new BackgroundWorker();
+            bgWorker.DoWork += bgWorker_DoWorkDelete;
+            bgWorker.RunWorkerCompleted += bgWorker_WorkComplete;
+
+            if (!bgWorker.IsBusy)
+            {
+                bgWorker.RunWorkerAsync();
+            }
+            Refresh();
+        }
+
+        private void usun_Canceled_Click(object sender, RoutedEventArgs e)
+        {
+            trybUsuwania = 4;
+            BackgroundWorker bgWorker = new BackgroundWorker();
+            bgWorker.DoWork += bgWorker_DoWorkDelete;
+            bgWorker.RunWorkerCompleted += bgWorker_WorkComplete;
+
+            if (!bgWorker.IsBusy)
+            {
+                bgWorker.RunWorkerAsync();
+            }
+            Refresh();
+        }
+
+        private void edytuj_todo_Click(object sender, RoutedEventArgs e)
+        {
+            trybEdycji = 1;
+            BackgroundWorker bgWorker = new BackgroundWorker();
+            bgWorker.DoWork += bgWorker_DoWorkEdit;
+            bgWorker.RunWorkerCompleted += bgWorker_WorkComplete;
+
+            if (!bgWorker.IsBusy)
+            {
+                bgWorker.RunWorkerAsync();
+            }
+            Refresh();
+        }
+
+        private void edytuj_doing_Click(object sender, RoutedEventArgs e)
+        {
+            trybEdycji = 2;
+            BackgroundWorker bgWorker = new BackgroundWorker();
+            bgWorker.DoWork += bgWorker_DoWorkEdit;
+            bgWorker.RunWorkerCompleted += bgWorker_WorkComplete;
+
+            if (!bgWorker.IsBusy)
+            {
+                bgWorker.RunWorkerAsync();
+            }
+            Refresh();
+        }
+
+        private void edytuj_done_Click(object sender, RoutedEventArgs e)
+        {
+            trybEdycji = 3;
+            BackgroundWorker bgWorker = new BackgroundWorker();
+            bgWorker.DoWork += bgWorker_DoWorkEdit;
+            bgWorker.RunWorkerCompleted += bgWorker_WorkComplete;
+
+            if (!bgWorker.IsBusy)
+            {
+                bgWorker.RunWorkerAsync();
+            }
+            Refresh();
+        }
+
+        private void edytuj_canceled_Click(object sender, RoutedEventArgs e)
+        {
+            trybEdycji = 4;
+            BackgroundWorker bgWorker = new BackgroundWorker();
+            bgWorker.DoWork += bgWorker_DoWorkEdit;
+            bgWorker.RunWorkerCompleted += bgWorker_WorkComplete;
+
+            if (!bgWorker.IsBusy)
+            {
+                bgWorker.RunWorkerAsync();
+            }
+            Refresh();
+        }
+
+        private void wyloguj_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow main = new MainWindow();
+            Close();
+            main.Show();
         }
     }
 }

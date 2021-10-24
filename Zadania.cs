@@ -31,7 +31,17 @@ namespace DeskC
             }
         }
 
-        private static string LoadConnectionString(string id = "Default")
+        public static void UpdateTask(TaskModel task)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                string sql = $"UPDATE Tasks SET shortText = @shortText, fullText = @fullText, statusId = @statusId WHERE id = @Id";
+                cnn.Execute(sql, task);
+            }
+        }
+
+
+         private static string LoadConnectionString(string id = "Default")
         {
             return ConfigurationManager.ConnectionStrings[id].ConnectionString;
         }

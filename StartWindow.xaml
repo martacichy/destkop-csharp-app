@@ -8,51 +8,51 @@
         Title="Kanban" Height="800" Width="1600">
     <Grid TextBlock.FontSize="22">
 
-        <DockPanel HorizontalAlignment="Left" Height="560" LastChildFill="False" Margin="10,199,0,0" VerticalAlignment="Top" Width="1160" Background="Aqua">
+        <DockPanel HorizontalAlignment="Left" Height="560" LastChildFill="False" Margin="10,199,0,0" VerticalAlignment="Top" Width="1160">
             <Grid Width="290">
-                <ListBox x:Name="myTaskTodo" ItemsSource="{Binding ToDo}" MouseDoubleClick="myTaskTodo_DoubleClick" >
+                <ListBox x:Name="myTaskTodo" ItemsSource="{Binding ToDo}" MouseDoubleClick="myTaskTodo_DoubleClick" Background="WhiteSmoke" Margin="0,0,0,44" >
                     <ListBox.ItemTemplate>
                         <DataTemplate>
-                            <CheckBox x:Name="taskTodoDisplay" IsChecked="{Binding Selected}" Content="{Binding TextToDisplay}" Checked="RadioButton_Checked"/>
+                            <RadioButton x:Name="taskTodoDisplay" IsChecked="{Binding Selected}" Content="{Binding TextToDisplay}" Checked="RadioButton_Checked"/>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>
             </Grid>
             <Grid Width="290">
-                <ListBox x:Name="mytaskDoing" ItemsSource="{Binding Doing}" MouseDoubleClick="myTaskDoing_DoubleClick" >
+                <ListBox x:Name="mytaskDoing" ItemsSource="{Binding Doing}" MouseDoubleClick="myTaskDoing_DoubleClick" Margin="0,0,0,44" >
                     <ListBox.ItemTemplate>
                         <DataTemplate>
-                            <CheckBox x:Name="taskDoingDisplay" IsChecked="{Binding Selected}" Content="{Binding TextToDisplay}" Checked="RadioButton_Checked"/>
+                            <RadioButton x:Name="taskDoingDisplay" IsChecked="{Binding Selected}" Content="{Binding TextToDisplay}" Checked="RadioButton_Checked"/>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>
             </Grid>
             <Grid Width="290">
-                <ListBox x:Name="mytaskDone" ItemsSource="{Binding Done}">
+                <ListBox x:Name="mytaskDone" ItemsSource="{Binding Done}" Margin="0,0,0,44" Background="WhiteSmoke">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
-                            <CheckBox x:Name="taskDoneDisplay" IsChecked="{Binding Selected}" Content="{Binding TextToDisplay}" Checked="RadioButton_Checked" />
+                            <RadioButton x:Name="taskDoneDisplay" IsChecked="{Binding Selected}" Content="{Binding TextToDisplay}" Checked="RadioButton_Checked" />
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>
             </Grid>
             <Grid Width="290">
-                <ListBox x:Name="mytaskCanceled" ItemsSource="{Binding Canceled}">
+                <ListBox x:Name="mytaskCanceled" ItemsSource="{Binding Canceled}" Margin="0,0,0,44">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
-                            <CheckBox x:Name="taskCanceledDisplay" IsChecked="{Binding Selected}" Content="{Binding TextToDisplay}" Checked="RadioButton_Checked"/>
+                            <RadioButton x:Name="taskCanceledDisplay" IsChecked="{Binding Selected}" Content="{Binding TextToDisplay}" Checked="RadioButton_Checked"/>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>
             </Grid>
         </DockPanel>
-        <Grid TextBlock.FontSize="20">
+        <Grid TextBlock.FontSize="20" RenderTransformOrigin="0.645,0.115">
             <Label Content="Opis zadania" Height="50" VerticalAlignment="Top" RenderTransformOrigin="7.789,0.817" Margin="1236,250,44,0"/>
             <TextBox Name ="shortText" HorizontalAlignment="Left" Height="43" Margin="1236,183,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="312" MaxLength="20"/>
             <TextBox Name ="fullText" HorizontalAlignment="Left" Height="96" Margin="1236,305,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="312" MaxLength="30" RenderTransformOrigin="0.635,2.413"/>
-            <ComboBox Name="status" HorizontalAlignment="Left" Margin="1236,477,0,0" VerticalAlignment="Top" Width="312" SelectionChanged="ComboBox_SelectionChanged" Height="41"/>
+            <ComboBox Background="WhiteSmoke" Name="status" HorizontalAlignment="Left" Margin="1236,477,0,0" VerticalAlignment="Top" Width="312" SelectionChanged="ComboBox_SelectionChanged" Height="41"/>
             <Label Content="Status" Height="50" VerticalAlignment="Top" RenderTransformOrigin="7.789,0.817" Margin="1236,422,44,0"/>
-            <Button Name="dodaj" Content="Dodaj" HorizontalAlignment="Left" Margin="1416,590,0,0" VerticalAlignment="Top" Width="132" Height="46" Click="ButtonDodaj_Click"/>
+            <Button Background="WhiteSmoke" Name="dodaj" Content="Dodaj" HorizontalAlignment="Left" Margin="1416,585,0,0" VerticalAlignment="Top" Width="132" Height="46" Click="ButtonDodaj_Click"  />
             <Label Content="Tytuł zadania" Height="50" VerticalAlignment="Top" RenderTransformOrigin="7.789,0.817" Margin="1236,128,44,0"/>
             <DockPanel TextBlock.FontSize="28" TextBlock.TextAlignment="Center" HorizontalAlignment="Left" Height="64" Margin="10,128,0,0" VerticalAlignment="Top" Width="1158" RenderTransformOrigin="0.497,0.02">
                 <Label Content="To do" HorizontalAlignment="Left" VerticalAlignment="Top" Width="290" Height="64"/>
@@ -60,9 +60,18 @@
                 <Label Content="Done" HorizontalAlignment="Left" VerticalAlignment="Top" Width="290" Height="64"/>
                 <Label Content="Canceled" HorizontalAlignment="Left" VerticalAlignment="Top" Width="290" Height="64"/>
             </DockPanel>
-            <Button Name="usun" Content="Usuń" HorizontalAlignment="Left" Margin="1236,590,0,0" VerticalAlignment="Top" Width="132" Height="46" Click="ButtonUsun_Click" RenderTransformOrigin="-0.633,0.543"/>
-            <Label FontSize="24" FontFamily="Consolas" Name="userLabel" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,-1.027" Height="68" Width="586"/>
-            <Button Name="refresh" Content="Refresh" HorizontalAlignment="Left" Margin="1316,694,0,0" VerticalAlignment="Top" Width="150" Click="refresh_Click" />
+            <Label FontSize="24" TextBlock.Foreground="CornflowerBlue" Name="userLabel" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,-1.027" Height="68" Width="586"/>
+            <Button Background="WhiteSmoke" Name="refresh" Content="Refresh" HorizontalAlignment="Left" Margin="1316,694,0,0" VerticalAlignment="Top" Width="150" Click="refresh_Click" />
+            <Button Background="WhiteSmoke" x:Name="usun_Todo" Content="Usuń" HorizontalAlignment="Left" Margin="163,713,0,0" VerticalAlignment="Top" Width="132" Height="46" Click="usun_Todo_Click" RenderTransformOrigin="-0.633,0.543"/>
+            <Button Background="WhiteSmoke" x:Name="usun_Doing" Content="Usuń" HorizontalAlignment="Left" Margin="444,713,0,0" VerticalAlignment="Top" Width="132" Height="46" Click="usun_Doing_Click" RenderTransformOrigin="-0.633,0.543"/>
+            <Button Background="WhiteSmoke" x:Name="usun_Done" Content="Usuń" HorizontalAlignment="Left" Margin="739,713,0,0" VerticalAlignment="Top" Width="132" Height="46" Click="usun_Done_Click" RenderTransformOrigin="-0.633,0.543"/>
+            <Button Background="WhiteSmoke" x:Name="usun_Canceled" Content="Usuń" HorizontalAlignment="Left" Margin="1036,713,0,0" VerticalAlignment="Top" Width="132" Height="46" Click="usun_Canceled_Click" RenderTransformOrigin="-0.633,0.543"/>
+            <Button Background="WhiteSmoke" x:Name="edytuj_Todo" Content="Edytuj" HorizontalAlignment="Left" Margin="26,713,0,0" VerticalAlignment="Top" Width="132" Height="46" Click="edytuj_todo_Click"/>
+            <Button Background="WhiteSmoke" x:Name="edytuj_Doing" Content="Edytuj" HorizontalAlignment="Left" Margin="310,713,0,0" VerticalAlignment="Top" Width="132" Height="46" Click="edytuj_doing_Click"/>
+            <Button Background="WhiteSmoke" x:Name="edytuj_Done" Content="Edytuj" HorizontalAlignment="Left" Margin="604,713,0,0" VerticalAlignment="Top" Width="132" Height="46" Click="edytuj_done_Click"/>
+            <Button Background="WhiteSmoke" x:Name="edytuj_Canceled" Content="Edytuj" HorizontalAlignment="Left" Margin="898,713,0,0" VerticalAlignment="Top" Width="132" Height="46" Click="edytuj_canceled_Click"/>
+            <Button Background="WhiteSmoke" x:Name="zapisz" Content="Zapisz" HorizontalAlignment="Left" Margin="1250,585,0,0" VerticalAlignment="Top" Width="132" Height="46" Click="zapisz_Click" />
+            <Button Background="WhiteSmoke" x:Name="wyloguj" Content="Wyloguj" HorizontalAlignment="Left" Margin="1450,10,0,0" VerticalAlignment="Top" Width="132" Height="46" Click="wyloguj_Click" />
         </Grid>
 
 

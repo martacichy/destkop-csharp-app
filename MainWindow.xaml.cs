@@ -46,6 +46,7 @@ namespace DeskC
                     StartWindow main = new StartWindow();
                     Close();
                     main.Show();
+
                 }
                 else
                 {

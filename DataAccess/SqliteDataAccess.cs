@@ -24,6 +24,22 @@ namespace DeskC
             }
         }
 
+        public static ObservableCollection<TaskModel> LoadAll(string ID)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                var output = cnn.Query<TaskModel>("select * from Tasks WHERE usId =" + ID + ";").ToList();
+
+                foreach (var d in output)
+                {
+                    d.TextToDisplay = d.shortText + "\n " + d.fullText;
+                }
+
+                ObservableCollection<TaskModel> response = new ObservableCollection<TaskModel>(output);
+                return response;
+            }
+        }
+
         public static ObservableCollection<TaskModel> LoadToDo(string ID)
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))

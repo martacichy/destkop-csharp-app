@@ -6,12 +6,12 @@
         xmlns:local="clr-namespace:DeskC"
         mc:Ignorable="d"
         Title="MainWindow" Height="708" Width="560">
-    <Grid HorizontalAlignment="Left" Height="698" VerticalAlignment="Top" Width="550" Margin="0,0,0,-21" TextBlock.FontSize="22" Background="AliceBlue">
+    <Grid HorizontalAlignment="Left" Height="698" VerticalAlignment="Top" Width="550" Margin="0,0,0,-21" TextBlock.FontSize="26" Background="AliceBlue" TextBlock.FontWeight="Light" TextBlock.TextAlignment="Justify">
         <PasswordBox Name="password" HorizontalAlignment="Center"  VerticalAlignment="Top" Height="60" Width="300" Margin="117,382,114,0" />
         <TextBox Name="login" HorizontalAlignment="Left" Height="60" Margin="126,264,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="300
                  "/>
         <Label Content="User" Height="50" Width="292" Margin="126,209,132,439"/>
         <Label Content="Password" Height="50" Width="292" Margin="126,327,132,321"/>
-        <Button Name="Zaloguj" Content="Zaloguj" HorizontalAlignment="Center" VerticalAlignment="Top" Width="176" Height="46" Margin="250,506,124,0" Click="zaloguj_Click"/>
+        <Button Background="WhiteSmoke" Name="Zaloguj" Content="Zaloguj" HorizontalAlignment="Center" VerticalAlignment="Top" Width="176" Height="46" Margin="250,506,124,0" Click="zaloguj_Click"/>
     </Grid>
 </Window>
