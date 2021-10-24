@@ -68,8 +68,6 @@
       <DependentUpon>Details.xaml</DependentUpon>
     </Compile>
     <Compile Include="Session.cs" />
-    <Compile Include="Zadania.cs" />
-    <Compile Include="DataAccess\SqliteDataAccess.cs" />
     <Compile Include="StartWindow.xaml.cs">
       <DependentUpon>StartWindow.xaml</DependentUpon>
     </Compile>

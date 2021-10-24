@@ -81,7 +81,7 @@ namespace DeskC
         {
             if (fullText.Text.Length != 0 && shortText.Text.Length != 0)
             {
-                Zadania.AddTask(task);
+                Logic.DataAccess.AddTask.DodajZadanie(task);
                 Wyczysc();
             }
             else
@@ -93,7 +93,7 @@ namespace DeskC
             if (fullText.Text.Length != 0 && shortText.Text.Length != 0)
             {
 
-                Zadania.UpdateTask(task);
+                Logic.DataAccess.UpdateTask.ZaktualizujZadanie(task);
             }
             else
                 MessageBox.Show("Uzupełnij wszystkie pola!");
@@ -129,7 +129,7 @@ namespace DeskC
                                                 select s.Id;
                         foreach (var task in tasksToDeleteToDo)
                         {
-                            Zadania.DeleteTask(task);
+                            Logic.DataAccess.DeleteTask.UsunZadanie(task);
                         }
                         break;
                     }
@@ -140,7 +140,7 @@ namespace DeskC
                                                  select s.Id;
                         foreach (var task in tasksToDeleteDoing)
                         {
-                            Zadania.DeleteTask(task);
+                            Logic.DataAccess.DeleteTask.UsunZadanie(task);
                         }
                         break;
                     }
@@ -151,7 +151,7 @@ namespace DeskC
                                                 select s.Id;
                         foreach (var task in tasksToDeleteDone)
                         {
-                            Zadania.DeleteTask(task);
+                            Logic.DataAccess.DeleteTask.UsunZadanie(task);
                         }
                         break;
                     }
@@ -162,7 +162,7 @@ namespace DeskC
                                                     select s.Id;
                         foreach (var task in tasksToDeleteCanceled)
                         {
-                            Zadania.DeleteTask(task);
+                            Logic.DataAccess.DeleteTask.UsunZadanie(task);
                         }
                         break;
                     }
@@ -188,11 +188,13 @@ namespace DeskC
                         var taskToEdit = from s in ToDo
                                          where s.Selected == true
                                          select s;
-                        idDoUsuniecia = taskToEdit.First().Id;
-
-                        Dispatcher.Invoke(new Action(() => { shortText.Text = taskToEdit.First().shortText; }));
-                        Dispatcher.Invoke(new Action(() => { fullText.Text = taskToEdit.First().fullText; }));
-                        Dispatcher.Invoke(new Action(() => { status.SelectedIndex = taskToEdit.First().statusId - 1; }));
+                        if (taskToEdit.Count() == 1)
+                        {
+                            idDoUsuniecia = taskToEdit.First().Id;
+                            Dispatcher.Invoke(new Action(() => { shortText.Text = taskToEdit.First().shortText; }));
+                            Dispatcher.Invoke(new Action(() => { fullText.Text = taskToEdit.First().fullText; }));
+                            Dispatcher.Invoke(new Action(() => { status.SelectedIndex = taskToEdit.First().statusId - 1; }));
+                        }
                         break;
                     }
                 case 2:
@@ -200,11 +202,14 @@ namespace DeskC
                         var taskToEdit = from s in Doing
                                          where s.Selected == true
                                          select s;
-                        idDoUsuniecia = taskToEdit.First().Id;
-
-                        Dispatcher.Invoke(new Action(() => { shortText.Text = taskToEdit.First().shortText; }));
-                        Dispatcher.Invoke(new Action(() => { fullText.Text = taskToEdit.First().fullText; }));
-                        Dispatcher.Invoke(new Action(() => { status.SelectedIndex = taskToEdit.First().statusId - 1; }));
+                        if (taskToEdit.Count() == 1)
+                        {
+                            idDoUsuniecia = taskToEdit.First().Id;
+                            Dispatcher.Invoke(new Action(() => { shortText.Text = taskToEdit.First().shortText; }));
+                            Dispatcher.Invoke(new Action(() => { fullText.Text = taskToEdit.First().fullText; }));
+                            Dispatcher.Invoke(new Action(() => { status.SelectedIndex = taskToEdit.First().statusId - 1; }));
+                        }
+                        
                         break;
                     }
                 case 3:
@@ -212,11 +217,13 @@ namespace DeskC
                         var taskToEdit = from s in Done
                                          where s.Selected == true
                                          select s;
-                        idDoUsuniecia = taskToEdit.First().Id;
-
-                        Dispatcher.Invoke(new Action(() => { shortText.Text = taskToEdit.First().shortText; }));
-                        Dispatcher.Invoke(new Action(() => { fullText.Text = taskToEdit.First().fullText; }));
-                        Dispatcher.Invoke(new Action(() => { status.SelectedIndex = taskToEdit.First().statusId - 1; }));
+                        if (taskToEdit.Count() == 1)
+                        {
+                            idDoUsuniecia = taskToEdit.First().Id;
+                            Dispatcher.Invoke(new Action(() => { shortText.Text = taskToEdit.First().shortText; }));
+                            Dispatcher.Invoke(new Action(() => { fullText.Text = taskToEdit.First().fullText; }));
+                            Dispatcher.Invoke(new Action(() => { status.SelectedIndex = taskToEdit.First().statusId - 1; }));
+                        }
                         break;
                     }
                 case 4:
@@ -224,11 +231,14 @@ namespace DeskC
                         var taskToEdit = from s in Canceled
                                          where s.Selected == true
                                          select s;
-                        idDoUsuniecia = taskToEdit.First().Id;
-
-                        Dispatcher.Invoke(new Action(() => { shortText.Text = taskToEdit.First().shortText; }));
-                        Dispatcher.Invoke(new Action(() => { fullText.Text = taskToEdit.First().fullText; }));
-                        Dispatcher.Invoke(new Action(() => { status.SelectedIndex = taskToEdit.First().statusId - 1; }));
+                        if (taskToEdit.Count() == 1)
+                        {
+                            idDoUsuniecia = taskToEdit.First().Id;
+                            Dispatcher.Invoke(new Action(() => { shortText.Text = taskToEdit.First().shortText; }));
+                            Dispatcher.Invoke(new Action(() => { fullText.Text = taskToEdit.First().fullText; }));
+                            Dispatcher.Invoke(new Action(() => { status.SelectedIndex = taskToEdit.First().statusId - 1; }));
+                        }    
+                        
                         break;
                     }
                 default:
@@ -237,7 +247,6 @@ namespace DeskC
                                          where s.Selected == true
                                          select s;
                         idDoUsuniecia = taskToEdit.First().Id;
-
                         Dispatcher.Invoke(new Action(() => { shortText.Text = taskToEdit.First().shortText; }));
                         Dispatcher.Invoke(new Action(() => { fullText.Text = taskToEdit.First().fullText; }));
                         Dispatcher.Invoke(new Action(() => { status.SelectedIndex = taskToEdit.First().statusId - 1; }));
@@ -277,13 +286,13 @@ namespace DeskC
         private void Refresh()
         {
             ToDo = null;
-            statusy = SqliteDataAccess.LoadTaskEnum();
-            ludzie = SqliteDataAccess.LoadPeople();
-            ToDo = SqliteDataAccess.LoadToDo(Session.Id);
-            Doing = SqliteDataAccess.LoadDoing(Session.Id);
-            Done = SqliteDataAccess.LoadDone(Session.Id);
-            Canceled = SqliteDataAccess.LoadCanceled(Session.Id);
-            All = SqliteDataAccess.LoadAll(Session.Id);   
+            statusy = Logic.DataAccess.LoadTasks.LoadTaskEnum();
+            ludzie = Logic.DataAccess.LoadPeople.PobierzUzytkownikow();
+            ToDo = Logic.DataAccess.LoadTasks.LoadToDo(Session.Id);
+            Doing = Logic.DataAccess.LoadTasks.LoadDoing(Session.Id);
+            Done = Logic.DataAccess.LoadTasks.LoadDone(Session.Id);
+            Canceled = Logic.DataAccess.LoadTasks.LoadCanceled(Session.Id);
+            All = Logic.DataAccess.LoadTasks.LoadAll(Session.Id);   
             Dispatcher.Invoke(new Action(() => BindData()));
             Dispatcher.Invoke(new Action(() => { dodaj.Visibility = Visibility.Visible; }));
             Dispatcher.Invoke(new Action(() => { zapisz.Visibility = Visibility.Hidden; }));
