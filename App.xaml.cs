@@ -13,5 +13,6 @@ namespace DeskC
     /// </summary>
     public partial class App : Application
     {
+        
     }
 }

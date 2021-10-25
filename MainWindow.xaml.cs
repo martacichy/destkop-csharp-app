@@ -16,6 +16,7 @@ using System.Data.SQLite;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using System.ServiceProcess;
 
 namespace DeskC
 {
@@ -24,9 +25,18 @@ namespace DeskC
     /// </summary>
     public partial class MainWindow : Window
     {
+        public static ServiceController us;
+        private string[] stringArray;
+
         public MainWindow()
         {
+            us = new ServiceController(Properties.Settings.Default.nameService);
             InitializeComponent();
+            stringArray = new string[2];
+            stringArray[0] = Session.Login;
+            stringArray[1] = "status";
+            //us.Start(stringArray);
+
         }
 
         private void zaloguj_Click(object sender, RoutedEventArgs e)
@@ -46,6 +56,7 @@ namespace DeskC
                     StartWindow main = new StartWindow();
                     Close();
                     main.Show();
+                    //MainWindow.us.ExecuteCommand(200);
 
                 }
                 else

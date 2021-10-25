@@ -17,6 +17,7 @@ using System.Drawing;
 using DeskCLogic;
 using System.Collections.ObjectModel;
 using System.Threading;
+using System.ServiceProcess;
 
 namespace DeskC
 {
@@ -82,6 +83,7 @@ namespace DeskC
             if (fullText.Text.Length != 0 && shortText.Text.Length != 0)
             {
                 Logic.DataAccess.AddTask.DodajZadanie(task);
+                //MainWindow.us.ExecuteCommand(201);
                 Wyczysc();
             }
             else
@@ -130,6 +132,7 @@ namespace DeskC
                         foreach (var task in tasksToDeleteToDo)
                         {
                             Logic.DataAccess.DeleteTask.UsunZadanie(task);
+                            //MainWindow.us.ExecuteCommand(202);
                         }
                         break;
                     }
@@ -141,6 +144,7 @@ namespace DeskC
                         foreach (var task in tasksToDeleteDoing)
                         {
                             Logic.DataAccess.DeleteTask.UsunZadanie(task);
+                            //MainWindow.us.ExecuteCommand(202);
                         }
                         break;
                     }
@@ -152,6 +156,8 @@ namespace DeskC
                         foreach (var task in tasksToDeleteDone)
                         {
                             Logic.DataAccess.DeleteTask.UsunZadanie(task);
+                            //MainWindow.us.ExecuteCommand(202);
+
                         }
                         break;
                     }
@@ -163,6 +169,7 @@ namespace DeskC
                         foreach (var task in tasksToDeleteCanceled)
                         {
                             Logic.DataAccess.DeleteTask.UsunZadanie(task);
+                            //MainWindow.us.ExecuteCommand(202);
                         }
                         break;
                     }
@@ -461,6 +468,7 @@ namespace DeskC
             MainWindow main = new MainWindow();
             Close();
             main.Show();
+            //MainWindow.us.ExecuteCommand(203);
         }
     }
 }

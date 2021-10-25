@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace DeskC
 {
-    class Session
+    public class Session
     {
+
         public static string Id;
         public static string Login;
     }
