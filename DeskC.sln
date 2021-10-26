@@ -16,8 +16,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		deskCDB.db = deskCDB.db
 	EndProjectSection
 EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Setup", "..\Setup\Setup.vdproj", "{061AA588-8B75-47C7-81BD-D569B3251EF9}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeskCLogicTests", "..\DeskCLogicTests\DeskCLogicTests.csproj", "{181D1600-9559-4A15-BB7B-036F34507DD3}"
 EndProject
 Global
@@ -42,8 +40,6 @@ Global
 		{3EBD4135-6B72-41DE-9357-9734B87DFDEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3EBD4135-6B72-41DE-9357-9734B87DFDEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3EBD4135-6B72-41DE-9357-9734B87DFDEC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{061AA588-8B75-47C7-81BD-D569B3251EF9}.Debug|Any CPU.ActiveCfg = Debug
-		{061AA588-8B75-47C7-81BD-D569B3251EF9}.Release|Any CPU.ActiveCfg = Release
 		{181D1600-9559-4A15-BB7B-036F34507DD3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{181D1600-9559-4A15-BB7B-036F34507DD3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{181D1600-9559-4A15-BB7B-036F34507DD3}.Release|Any CPU.ActiveCfg = Release|Any CPU

@@ -54,11 +54,11 @@
             <Label Content="Status" Height="50" VerticalAlignment="Top" RenderTransformOrigin="7.789,0.817" Margin="1236,422,44,0"/>
             <Button Background="WhiteSmoke" Name="dodaj" Content="Dodaj" HorizontalAlignment="Left" Margin="1416,585,0,0" VerticalAlignment="Top" Width="132" Height="46" Click="ButtonDodaj_Click"  />
             <Label Content="Tytuł zadania" Height="50" VerticalAlignment="Top" RenderTransformOrigin="7.789,0.817" Margin="1236,128,44,0"/>
-            <DockPanel TextBlock.FontSize="28" TextBlock.TextAlignment="Center" HorizontalAlignment="Left" Height="64" Margin="10,128,0,0" VerticalAlignment="Top" Width="1158" RenderTransformOrigin="0.497,0.02">
-                <Label Content="To do" HorizontalAlignment="Left" VerticalAlignment="Top" Width="290" Height="64"/>
-                <Label Content="Doing" HorizontalAlignment="Left" VerticalAlignment="Top" Width="290" Height="64"/>
-                <Label Content="Done" HorizontalAlignment="Left" VerticalAlignment="Top" Width="290" Height="64"/>
-                <Label Content="Canceled" HorizontalAlignment="Left" VerticalAlignment="Top" Width="290" Height="64"/>
+            <DockPanel Background="WhiteSmoke"  TextBlock.FontSize="28" TextElement.FontStretch="Medium"  TextBlock.TextAlignment="Center" HorizontalAlignment="Left" Height="64" Margin="10,128,0,0" VerticalAlignment="Top" Width="1158" RenderTransformOrigin="0.497,0.02">
+                <Label Content="Do zrobienia"  HorizontalAlignment="Left" VerticalAlignment="Top" Width="290" Height="64" Background="LightSteelBlue" />
+                <Label Content="W trakcie" HorizontalAlignment="Left" VerticalAlignment="Top" Width="290" Height="64" Background="AliceBlue" />
+                <Label Content="Zakończone" HorizontalAlignment="Left" VerticalAlignment="Top" Width="290" Height="64" Background="LightSteelBlue"/>
+                <Label Content="Anulowane" HorizontalAlignment="Left" VerticalAlignment="Top" Width="290" Height="64" Background="AliceBlue"/>
             </DockPanel>
             <Label FontSize="24" TextBlock.Foreground="CornflowerBlue" Name="userLabel" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,-1.027" Height="68" Width="586"/>
             <Button Background="WhiteSmoke" Name="refresh" Content="Refresh" HorizontalAlignment="Left" Margin="1316,694,0,0" VerticalAlignment="Top" Width="150" Click="refresh_Click" />
