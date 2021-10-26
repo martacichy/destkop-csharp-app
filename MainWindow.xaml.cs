@@ -34,9 +34,9 @@ namespace DeskC
             us = new ServiceController(Properties.Settings.Default.nameService);
             InitializeComponent();
             stringArray = new string[2];
-            stringArray[0] = Session.Login;
+            stringArray[0] = "login";
             stringArray[1] = "status";
-            //us.Start(stringArray);
+            us.Start(stringArray);
             CheckForUpdates();
         }
 
@@ -65,7 +65,10 @@ namespace DeskC
                     StartWindow main = new StartWindow();
                     Close();
                     main.Show();
-                    //MainWindow.us.ExecuteCommand(200);
+
+                    stringArray[0] = Session.Login;
+
+                    MainWindow.us.ExecuteCommand(210);
 
                 }
                 else
@@ -85,16 +88,8 @@ namespace DeskC
         public static List<string> Auth(string User, string Password)
         {
 
-            //string query = "SELECT * FROM Users WHERE login= @login AND password = @password";
             SQLiteConnection connection = new SQLiteConnection(LoadConnectionString());
             connection.Open();
-            //SQLiteCommand cmd = new SQLiteCommand(query, connection);
-
-
-            //SQLiteDataAdapter da = new SQLiteDataAdapter(cmd);
-
-            //DataTable dt = new DataTable();
-            //da.Fill(dt);
             
             List<string> Return = new List<string>();
             string query = "SELECT * FROM Users WHERE Login = @login AND Password = @password LIMIT 1";

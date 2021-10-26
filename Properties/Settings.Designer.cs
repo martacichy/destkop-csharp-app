@@ -25,7 +25,7 @@ namespace DeskC.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("DeskCService")]
+        [global::System.Configuration.DefaultSettingValueAttribute("DeskCWindowsService")]
         public string nameService {
             get {
                 return ((string)(this["nameService"]));

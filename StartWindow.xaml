@@ -10,7 +10,7 @@
 
         <DockPanel HorizontalAlignment="Left" Height="560" LastChildFill="False" Margin="10,199,0,0" VerticalAlignment="Top" Width="1160">
             <Grid Width="290">
-                <ListBox x:Name="myTaskTodo" ItemsSource="{Binding ToDo}" MouseDoubleClick="myTaskTodo_DoubleClick" Background="WhiteSmoke" Margin="0,0,0,44" >
+                <ListBox x:Name="myTaskTodo" ItemsSource="{Binding ToDo}" Background="WhiteSmoke" Margin="0,0,0,44" >
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <RadioButton x:Name="taskTodoDisplay" IsChecked="{Binding Selected}" Content="{Binding TextToDisplay}" Checked="RadioButton_Checked"/>
@@ -19,7 +19,7 @@
                 </ListBox>
             </Grid>
             <Grid Width="290">
-                <ListBox x:Name="mytaskDoing" ItemsSource="{Binding Doing}" MouseDoubleClick="myTaskDoing_DoubleClick" Margin="0,0,0,44" >
+                <ListBox x:Name="mytaskDoing" ItemsSource="{Binding Doing}" Margin="0,0,0,44" >
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <RadioButton x:Name="taskDoingDisplay" IsChecked="{Binding Selected}" Content="{Binding TextToDisplay}" Checked="RadioButton_Checked"/>

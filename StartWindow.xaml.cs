@@ -28,7 +28,7 @@ namespace DeskC
     {
         public static int trybUsuwania = 1;
         public static int trybEdycji = 1;
-        public static int idDoUsuniecia;
+        public static int idDoEdycji;
         public ObservableCollection<TaskModel> ToDo = new ObservableCollection<TaskModel>();
         public ObservableCollection<TaskModel> Doing = new ObservableCollection<TaskModel>();
         public ObservableCollection<TaskModel> Done = new ObservableCollection<TaskModel>();
@@ -51,7 +51,6 @@ namespace DeskC
 
         }
 
-
         private void zapisz_Click(object sender, RoutedEventArgs e)
         {
             var task = new TaskModel();
@@ -59,7 +58,7 @@ namespace DeskC
             task.shortText = shortText.Text;
             task.statusId = MapujStatus(status.Text);
             task.usId = Session.Id;
-            task.Id = idDoUsuniecia;
+            task.Id = idDoEdycji;
             AktualizujZadanie(task);
 
             Wyczysc();
@@ -74,7 +73,6 @@ namespace DeskC
             task.statusId = MapujStatus(status.Text);
             task.usId = Session.Id;
             DodajZadanie(task);
-            //task.usId = Convert.ToInt32(Session.Id);
             
             Refresh();
         }
@@ -83,7 +81,7 @@ namespace DeskC
             if (fullText.Text.Length != 0 && shortText.Text.Length != 0)
             {
                 Logic.DataAccess.AddTask.DodajZadanie(task);
-                //MainWindow.us.ExecuteCommand(201);
+                MainWindow.us.ExecuteCommand(201);
                 Wyczysc();
             }
             else
@@ -132,7 +130,7 @@ namespace DeskC
                         foreach (var task in tasksToDeleteToDo)
                         {
                             Logic.DataAccess.DeleteTask.UsunZadanie(task);
-                            //MainWindow.us.ExecuteCommand(202);
+                            MainWindow.us.ExecuteCommand(202);
                         }
                         break;
                     }
@@ -144,7 +142,7 @@ namespace DeskC
                         foreach (var task in tasksToDeleteDoing)
                         {
                             Logic.DataAccess.DeleteTask.UsunZadanie(task);
-                            //MainWindow.us.ExecuteCommand(202);
+                            MainWindow.us.ExecuteCommand(202);
                         }
                         break;
                     }
@@ -156,7 +154,7 @@ namespace DeskC
                         foreach (var task in tasksToDeleteDone)
                         {
                             Logic.DataAccess.DeleteTask.UsunZadanie(task);
-                            //MainWindow.us.ExecuteCommand(202);
+                            MainWindow.us.ExecuteCommand(202);
 
                         }
                         break;
@@ -169,14 +167,14 @@ namespace DeskC
                         foreach (var task in tasksToDeleteCanceled)
                         {
                             Logic.DataAccess.DeleteTask.UsunZadanie(task);
-                            //MainWindow.us.ExecuteCommand(202);
+                            MainWindow.us.ExecuteCommand(202);
                         }
                         break;
                     }
                     
             }
             MessageBox.Show("Usunięto!");
-            //MainWindow.us.ExecuteCommand(206);
+            MainWindow.us.ExecuteCommand(206);
 
             Refresh();
         }
@@ -197,7 +195,7 @@ namespace DeskC
                                          select s;
                         if (taskToEdit.Count() == 1)
                         {
-                            idDoUsuniecia = taskToEdit.First().Id;
+                            idDoEdycji = taskToEdit.First().Id;
                             Dispatcher.Invoke(new Action(() => { shortText.Text = taskToEdit.First().shortText; }));
                             Dispatcher.Invoke(new Action(() => { fullText.Text = taskToEdit.First().fullText; }));
                             Dispatcher.Invoke(new Action(() => { status.SelectedIndex = taskToEdit.First().statusId - 1; }));
@@ -211,7 +209,7 @@ namespace DeskC
                                          select s;
                         if (taskToEdit.Count() == 1)
                         {
-                            idDoUsuniecia = taskToEdit.First().Id;
+                            idDoEdycji = taskToEdit.First().Id;
                             Dispatcher.Invoke(new Action(() => { shortText.Text = taskToEdit.First().shortText; }));
                             Dispatcher.Invoke(new Action(() => { fullText.Text = taskToEdit.First().fullText; }));
                             Dispatcher.Invoke(new Action(() => { status.SelectedIndex = taskToEdit.First().statusId - 1; }));
@@ -226,7 +224,7 @@ namespace DeskC
                                          select s;
                         if (taskToEdit.Count() == 1)
                         {
-                            idDoUsuniecia = taskToEdit.First().Id;
+                            idDoEdycji = taskToEdit.First().Id;
                             Dispatcher.Invoke(new Action(() => { shortText.Text = taskToEdit.First().shortText; }));
                             Dispatcher.Invoke(new Action(() => { fullText.Text = taskToEdit.First().fullText; }));
                             Dispatcher.Invoke(new Action(() => { status.SelectedIndex = taskToEdit.First().statusId - 1; }));
@@ -240,7 +238,7 @@ namespace DeskC
                                          select s;
                         if (taskToEdit.Count() == 1)
                         {
-                            idDoUsuniecia = taskToEdit.First().Id;
+                            idDoEdycji = taskToEdit.First().Id;
                             Dispatcher.Invoke(new Action(() => { shortText.Text = taskToEdit.First().shortText; }));
                             Dispatcher.Invoke(new Action(() => { fullText.Text = taskToEdit.First().fullText; }));
                             Dispatcher.Invoke(new Action(() => { status.SelectedIndex = taskToEdit.First().statusId - 1; }));
@@ -253,7 +251,7 @@ namespace DeskC
                         var taskToEdit = from s in ToDo
                                          where s.Selected == true
                                          select s;
-                        idDoUsuniecia = taskToEdit.First().Id;
+                        idDoEdycji = taskToEdit.First().Id;
                         Dispatcher.Invoke(new Action(() => { shortText.Text = taskToEdit.First().shortText; }));
                         Dispatcher.Invoke(new Action(() => { fullText.Text = taskToEdit.First().fullText; }));
                         Dispatcher.Invoke(new Action(() => { status.SelectedIndex = taskToEdit.First().statusId - 1; }));
@@ -335,21 +333,6 @@ namespace DeskC
             Refresh();
         }
 
-
-        private void myTaskTodo_DoubleClick(object sender, EventArgs e)
-        {
-            if (myTaskTodo.SelectedItem != null)
-            {
-                MessageBox.Show(myTaskTodo.SelectedItem.ToString());
-            }
-        }
-        private void myTaskDoing_DoubleClick(object sender, EventArgs e)
-        {
-            if (mytaskDoing.SelectedItem != null)
-            {
-                MessageBox.Show(mytaskDoing.SelectedItem.ToString());
-            }
-        }
 
         private void usun_Todo_Click(object sender, RoutedEventArgs e)
         {
@@ -466,9 +449,11 @@ namespace DeskC
         private void wyloguj_Click(object sender, RoutedEventArgs e)
         {
             MainWindow main = new MainWindow();
+            MainWindow.us.ExecuteCommand(203);
+            MainWindow.us.Stop();
             Close();
             main.Show();
-            //MainWindow.us.ExecuteCommand(203);
+
         }
     }
 }
