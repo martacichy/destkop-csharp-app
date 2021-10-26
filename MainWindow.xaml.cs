@@ -17,6 +17,7 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.ServiceProcess;
+using Squirrel;
 
 namespace DeskC
 {
@@ -36,7 +37,15 @@ namespace DeskC
             stringArray[0] = Session.Login;
             stringArray[1] = "status";
             //us.Start(stringArray);
+            CheckForUpdates();
+        }
 
+        private async Task CheckForUpdates()
+        {
+            using (var manager = new UpdateManager("C:\\Temp\\Releases"))
+            {
+                await manager.UpdateApp();
+            }
         }
 
         private void zaloguj_Click(object sender, RoutedEventArgs e)

@@ -11,11 +11,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeskCService", "..\DeskCSer
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeskCServiceTests", "..\UnitTestProject\DeskCServiceTests.csproj", "{3EBD4135-6B72-41DE-9357-9734B87DFDEC}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A0C23A8C-5CA2-4FBF-B5EB-C8AC15D23919}"
-	ProjectSection(SolutionItems) = preProject
-		deskCDB.db = deskCDB.db
-	EndProjectSection
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeskCLogicTests", "..\DeskCLogicTests\DeskCLogicTests.csproj", "{181D1600-9559-4A15-BB7B-036F34507DD3}"
 EndProject
 Global
